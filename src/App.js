@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>Welcome</div>
+        <div>Coin Market Cap Top 100!!</div>
         <AxioCall />
       </header>
     </div>

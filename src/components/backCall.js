@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import CoinData from './information.js'
 
 class AxioCall extends React.Component {
     state = {
+        searched: false,
         query: "",
         circulatingSupply: 0,
         totalSupply:  0,
@@ -23,7 +25,8 @@ class AxioCall extends React.Component {
                 console.log(info[i]);
                 if (info[i].symbol === search ) {
                     console.log(info[i]);
-                    self.setState({ 
+                    self.setState({
+                        searched: true, 
                         circulatingSupply: info[i].circulating_supply,
                         totalSupply:  info[i].total_supply,
                         name: info[i].name,
@@ -31,20 +34,21 @@ class AxioCall extends React.Component {
                         priceInUsd: info[i].quote.USD.price
                     });
                     return;
+                } else {
+                    self.setState({ searched: false });
                 }
             }
-
-            
-            
-            
+   
         }).catch(error => {
             console.log("error");
             
         });
     }
+    
     handleSearch = (event) => {
         event.preventDefault();
-        this.backpull(this.state.query);
+        let words = this.state.query.toUpperCase();
+        this.backpull(words);
     }
     handleChange = (event) => {
         this.setState({ query: event.target.value })
@@ -55,13 +59,17 @@ class AxioCall extends React.Component {
         <div>
             <form onSubmit={this.handleSearch}>
                 <input type="text" value={this.state.query} onChange={this.handleChange}></input>
-                <button >I'm Useless</button>
+                <button >Search by Ticker</button>
             </form>
-            <p>Token Name: {this.state.name}</p>
-            <p>Token Symbol: {this.state.symbol}</p>
-            <p>price in USD: ${this.state.priceInUsd}</p>
-            <p>Circulating Supply: {this.state.circulatingSupply}</p>
-            <p>Total Supply: {this.state.totalSupply}</p>
+            
+            {this.state.searched ? <CoinData 
+                name={this.state.name}
+                symbol={this.state.symbol}
+                priceinusd={this.state.priceInUsd}
+                circulatingsupply={this.state.circulatingSupply}
+                totalsupply={this.state.totalSupply}
+                 />: `Please enter a valid crypto ticker`}
+
         </div>
         
       );

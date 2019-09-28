@@ -7,7 +7,7 @@ class CoinData extends React.Component {
         <div>
             <p>Token Name: {this.props.name}</p>
             <p>Token Symbol: {this.props.symbol}</p>
-            <p>price in USD: ${this.props.priceinusd}</p>
+            <p>Price in USD: ${this.props.priceinusd}</p>
             <p>Circulating Supply: {this.props.circulatingsupply}</p>
             <p>Total Supply: {this.props.totalsupply}</p>
         </div>

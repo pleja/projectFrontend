@@ -23,7 +23,7 @@ class AxioCall extends React.Component {
             console.log(info);
             for (var i = 0; i < info.length; i++) {
                 console.log(info[i]);
-                if (info[i].symbol === search ) {
+                if (info[i].symbol === search || info[i].name === search || info[i].slug === search ) {
                     console.log(info[i]);
                     self.setState({
                         searched: true, 
@@ -47,7 +47,10 @@ class AxioCall extends React.Component {
     
     handleSearch = (event) => {
         event.preventDefault();
-        let words = this.state.query.toUpperCase();
+        let words = this.state.query;
+        if (words.length === 3) {
+            words = words.toUpperCase();
+        }
         this.backpull(words);
     }
     handleChange = (event) => {
@@ -59,7 +62,7 @@ class AxioCall extends React.Component {
         <div>
             <form onSubmit={this.handleSearch}>
                 <input type="text" value={this.state.query} onChange={this.handleChange}></input>
-                <button >Search by Ticker</button>
+                <button >Search</button>
             </form>
             
             {this.state.searched ? <CoinData 

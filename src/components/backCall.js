@@ -5,24 +5,43 @@ class AxioCall extends React.Component {
     state = {
         word: 0
     }
-    backCall = () => {
+    backpull = () => {
         console.log("sending")
+        var self = this;
         axios.get("http://localhost:3001/hi")
         .then(function (response) {
-            console.log(response);
-            let value = response.data;
-            return value;
+            let info = response.data;
+            console.log(info);
+            let specific = info[0].name;
+            console.log(specific)
+            //this.setState({ word: specific });
+            return specific;
+            //let value = response.data;
+            //return response;
         })
-        .then(value => {
-            this.setState({ word: value});
-            console.log(this.state.word);
+        .then(function (specific) {
+            console.log(specific);
+            //this.valueUpdate(specific);
+            self.setState({ word: specific });
+        })
+        .catch(value => {
+            console.log("error");
+            //this.setState({ word: value});
+            //console.log(this.state.word);
         });
+    }
+    valueUpdate = (data) => {
+        this.setState({ word: data });
+    }
+    keyPress = () => {
+        //let apiData = this.backpull();
+        //console.log(this.backpull);
     }
 
   render () {
       return (
         <div>
-            <button onClick={this.backCall}>I'm Useless</button>
+            <button onClick={this.backpull}>I'm Useless</button>
             <p>{this.state.word}</p>
         </div>
         

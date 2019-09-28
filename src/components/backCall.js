@@ -3,46 +3,65 @@ import axios from 'axios';
 
 class AxioCall extends React.Component {
     state = {
-        word: 0
+        query: "",
+        circulatingSupply: 0,
+        totalSupply:  0,
+        name: "",
+        symbol: "",
+        priceInUsd: 0
     }
-    backpull = () => {
+    backpull = (search) => {
         console.log("sending")
         var self = this;
-        axios.get("http://localhost:3001/hi")
-        .then(function (response) {
-            let info = response.data;
+        axios({
+            method: 'get',
+            url: "http://localhost:3001/hi",
+        }).then(function (response) {
+            let info = response.data.data;
             console.log(info);
-            let specific = info[0].name;
-            console.log(specific)
-            //this.setState({ word: specific });
-            return specific;
-            //let value = response.data;
-            //return response;
-        })
-        .then(function (specific) {
-            console.log(specific);
-            //this.valueUpdate(specific);
-            self.setState({ word: specific });
-        })
-        .catch(value => {
+            for (var i = 0; i < info.length; i++) {
+                console.log(info[i]);
+                if (info[i].symbol === search ) {
+                    console.log(info[i]);
+                    self.setState({ 
+                        circulatingSupply: info[i].circulating_supply,
+                        totalSupply:  info[i].total_supply,
+                        name: info[i].name,
+                        symbol: info[i].symbol,
+                        priceInUsd: info[i].quote.USD.price
+                    });
+                    return;
+                }
+            }
+
+            
+            
+            
+        }).catch(error => {
             console.log("error");
-            //this.setState({ word: value});
-            //console.log(this.state.word);
+            
         });
     }
-    valueUpdate = (data) => {
-        this.setState({ word: data });
+    handleSearch = (event) => {
+        event.preventDefault();
+        this.backpull(this.state.query);
     }
-    keyPress = () => {
-        //let apiData = this.backpull();
-        //console.log(this.backpull);
+    handleChange = (event) => {
+        this.setState({ query: event.target.value })
     }
 
   render () {
       return (
         <div>
-            <button onClick={this.backpull}>I'm Useless</button>
-            <p>{this.state.word}</p>
+            <form onSubmit={this.handleSearch}>
+                <input type="text" value={this.state.query} onChange={this.handleChange}></input>
+                <button >I'm Useless</button>
+            </form>
+            <p>Token Name: {this.state.name}</p>
+            <p>Token Symbol: {this.state.symbol}</p>
+            <p>price in USD: ${this.state.priceInUsd}</p>
+            <p>Circulating Supply: {this.state.circulatingSupply}</p>
+            <p>Total Supply: {this.state.totalSupply}</p>
         </div>
         
       );

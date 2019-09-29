@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import CoinData from './information.js'
+import CoinData from './information.js';
+import { Button } from 'react-bootstrap';
+import '../App.css';
+
 
 class AxioCall extends React.Component {
     state = {
@@ -59,11 +62,14 @@ class AxioCall extends React.Component {
 
   render () {
       return (
-        <div>
-            <form onSubmit={this.handleSearch}>
-                <input type="text" value={this.state.query} onChange={this.handleChange}></input>
-                <button >Search</button>
-            </form>
+        <div className="workBox">
+            <div className="Texts">Coin Market Cap Top 100</div>
+            <div>
+                <input className="divStyle" type="text" value={this.state.query} onChange={this.handleChange}></input>
+                <Button onClick={this.handleSearch} variant="primary" size="lg" block> Search </Button>
+            </div>
+                
+            
             
             {this.state.searched ? <CoinData 
                 name={this.state.name}
@@ -71,7 +77,9 @@ class AxioCall extends React.Component {
                 priceinusd={this.state.priceInUsd}
                 circulatingsupply={this.state.circulatingSupply}
                 totalsupply={this.state.totalSupply}
-                 />: `Please enter a valid crypto ticker`}
+                 />: <p className='TextsTwo'>Please enter valid query</p>}
+
+                
 
         </div>
         

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -7,7 +8,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-image: url("./images/blockChain.jpg");
+  background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,3 +22,38 @@
 .App-link {
   color: #09d3ac;
 }
+
+.workBox {
+  width: 600px;
+  
+}
+
+.divStyle {
+  border: 5px solid rgb(48, 111, 248);
+  width: 100%;
+}
+
+.Texts {
+  color: rgb(252, 242, 223);
+  font: 50px "Marker Felt", fantasy;
+  text-shadow: 2px 2px 10px rgb(236, 126, 0);
+}
+.TextsTwo {
+  color: rgb(252, 242, 223);
+  font: 36px "Verdana", sans-serif;
+  font-style: oblique;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgb(236, 126, 0);
+}
+
+.ChartStyle {
+  font: 30px "Gill Sans", sans-serif;
+  font-weight: bold;
+  opacity: 0.8;
+  margin-top: 30px;
+}
+
+.backGround {
+  background-image: url("./images/blockChain.jpg")
+}
+

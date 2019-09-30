@@ -29,6 +29,14 @@ class CoinData extends React.Component {
                 <td>Total Supply </td>
                 <td>{this.props.totalsupply}</td>
               </tr>
+              <tr>
+                <td>Latest Date </td>
+                <td>{this.props.latestdate}</td>
+              </tr>
+              <tr>
+                <td>Latest Time </td>
+                <td>{this.props.latesttime}</td>
+              </tr>
             </tbody>
           </Table>
         </div>

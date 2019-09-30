@@ -14,6 +14,7 @@ class AxioCall extends React.Component {
         name: "",
         symbol: "",
         priceInUsd: 0,
+        marketCap: 0,
         lastUpdate: 0,
         latestTime: 0
     }
@@ -27,30 +28,30 @@ class AxioCall extends React.Component {
             let info = response.data.data;
             console.log(info);
             for (var i = 0; i < info.length; i++) {
-                //console.log(info[i]);
                 if (info[i].symbol === search || info[i].name === search || info[i].slug === search ) {
-                    console.log(info[i]);
-                    let newDate = "";
-                    let time = "";
+                    let price = info[i].quote.USD.price;
                     let date = info[i].last_updated;
-                    console.log(date);
+                    let cap = info[i].quote.USD.market_cap;
+                    let newDate = "";
+                    let time = "";                    
                     for (let b = 0; b < date.length; b++) {
-                        if (b < 9) {
+                        if (b < 10) {
                             newDate = newDate + date[b];
 
-                        } else if (b > 10 && b < date.length - 1) {
+                        } else if (b > 10 && b < date.length - 5) {
                             time = time + date[b];
                         }
                     }
-                    console.log(newDate);
-                    console.log(time);
+                    let shortPrice = self.removeDecimals(price);
+                    let marketcap = self.removeDecimals(cap);
                     self.setState({
                         searched: true, 
                         circulatingSupply: info[i].circulating_supply,
                         totalSupply:  info[i].total_supply,
                         name: info[i].name,
                         symbol: info[i].symbol,
-                        priceInUsd: info[i].quote.USD.price,
+                        priceInUsd: shortPrice,
+                        marketCap: marketcap,
                         latestDate: newDate,
                         latestTime: time
                     });
@@ -66,6 +67,11 @@ class AxioCall extends React.Component {
         });
     }
     
+    removeDecimals = (num) => {
+        let numbers = Math.round(num * 100) / 100;
+        return numbers;
+    }
+
     handleSearch = (event) => {
         event.preventDefault();
         let words = this.state.query;
@@ -93,6 +99,7 @@ class AxioCall extends React.Component {
                 name={this.state.name}
                 symbol={this.state.symbol}
                 priceinusd={this.state.priceInUsd}
+                marketcap={this.state.marketCap}
                 circulatingsupply={this.state.circulatingSupply}
                 totalsupply={this.state.totalSupply}
                 latestdate={this.state.latestDate}

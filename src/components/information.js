@@ -22,6 +22,10 @@ class CoinData extends React.Component {
                 <td>$ {this.props.priceinusd}</td>
               </tr>
               <tr>
+                <td>Market Cap</td>
+                <td>$ {this.props.marketcap}</td>
+              </tr>
+              <tr>
                 <td>Circulating Supply </td>
                 <td>{this.props.circulatingsupply}</td>
               </tr>
@@ -30,11 +34,11 @@ class CoinData extends React.Component {
                 <td>{this.props.totalsupply}</td>
               </tr>
               <tr>
-                <td>Latest Date </td>
+                <td>Latest Date (UTC) </td>
                 <td>{this.props.latestdate}</td>
               </tr>
               <tr>
-                <td>Latest Time </td>
+                <td>Latest Time (UTC) </td>
                 <td>{this.props.latesttime}</td>
               </tr>
             </tbody>

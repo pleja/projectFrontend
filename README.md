@@ -1,8 +1,5 @@
 ## Top 100 Crypto Updates from Coin Market Cap - React Front-End
 
-Pawel Leja
-101232470
-
 The purpose of this app is to display data about any top 100 cryptocurrency on coinmarketcap.com. It calls data from a seperate express.js back-end which calls data from the coin market cap API. The data is then displayed on the front-end. 
 
 Simply type in the ticker or the full-name of the currency. If it is a top-100 token, its information will be displayed in a chart.

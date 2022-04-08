@@ -15,7 +15,6 @@ Axios
 THIS IS A TWO-PART APP!
 
 The Back-End component of this app is required in order to connect to the coin market cap api. Instructions on setting up the back-end can be found on the Back-end readme.md. Find the Back-end at:
- https://github.com/pleja/projectBackend
 
 note: an API key from Coin Market Cap is required. You can obtain one from here: https://pro.coinmarketcap.com/login/
 The API key will be utilized in the Back-end component of this app.
